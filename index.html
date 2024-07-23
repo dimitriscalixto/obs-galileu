@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valores de Gado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 2em;
+            color: white;
+            background-color: black;
+            text-align: center;
+            padding-top: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div id="valor">Carregando...</div>
+
+    <script>
+        async function fetchValor() {
+            try {
+                const response = await fetch('http://localhost:3000/api/valor'); // Substitua pela URL real da API se necessário
+                const data = await response.json();
+                document.getElementById('valor').textContent = data.valor;
+            } catch (error) {
+                console.error('Erro ao buscar o valor:', error);
+                document.getElementById('valor').textContent = 'Erro';
+            }
+        }
+
+        // Fetch initial value
+        fetchValor();
+
+        // Fetch value every 10 seconds (10000 milliseconds)
+        setInterval(fetchValor, 10000);
+    </script>
+</body>
+</html>
